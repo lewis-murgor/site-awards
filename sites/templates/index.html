@@ -2,8 +2,34 @@
 
 {% block content %}
 {{block.super}}
-<div class="container">
-    <h1>Awards</h1>
+<div class="container-fluid">
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: white;">
+                    <div class="text-center">{{project.user}}</div>
+                </div>
+                <img src="{{project.project_image.url}}" class="img-responsive" alt="">
+                <div class="panel-footer" style="background-color: white;">
+                    <div class="text-center"><a href="{{project.link}}">{{project.title}}</a></div>
+                    {% autoescape on %}<p>{{project.description| safe}}</p>{% endautoescape %}
+                    <p class="text-center">Posted on: {{project.date|date:"l d F Y, H:i"}}</p>
+                    <div class="panel panel-default">
+                        <div class="panel-body rate">
+                            <a href="{%url 'project' project.id%}" style="color: black;">Rate Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    {% empty %}
+    <div class="row">
+      <h2 class="text-center">There are No projects posted yet</h2>
+    </div>
+    {% endfor %}    
 </div>
 
 
