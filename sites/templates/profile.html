@@ -1,1 +1,66 @@
 {%extends "base.html"%}
+{% load static %}
+{% block content %}
+{{block.super}}
+<div class="container-fluid">
+    <div class="row text-center">
+        {% if profile.profile_photo %}
+        <img src="{{profile.profile_photo.url}}" class="img-thumbnail" alt="profile_photo">
+        {%else%}
+        <img src="https://avatars.githubusercontent.com/u/95276296?v=4" width="250px"  alt="profile photo">
+        {% endif %}
+    </div>
+    <div class="text-center"><strong><em>{{user}}</em></strong></div>
+    <br>
+    <div class="row text-center">
+        {% if profile.Bio %}
+        <p>{{profile.Bio}}</p>
+        {%else%}
+        <p>No Bio</p>
+        {% endif %}
+    </div>
+    <br>
+    <div class="row text-center">
+        {% if profile.contact %}
+        <p>{{profile.contact}}</p>
+        {%else%}
+        <p></p>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4"></div>
+        <div class="col-md-4 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body edit">
+                    <a href="{%url 'update-profile'%}" style="color: black;">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% for project in projects %}
+    <div class="col-md-4 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-center">{{project.user}}</div>
+            </div>
+            <img src="{{project.project_image.url}}" class="img-responsive" alt="">
+            <div class="panel-footer" style="background-color: white;">
+                <div class="text-center"><a href="{{project.link}}">{{project.title}}</a></div>
+                {% autoescape on %}<p>{{project.description| safe}}</p>{% endautoescape %}
+                <p class="text-center">Posted on: {{project.date|date:"l d F Y, H:i"}}</p>
+                <div class="panel panel-default">
+                    <div class="panel-body rate">
+                        <a href="{%url 'project' project.id%}" style="color: black;">Rate Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    {% empty %}
+    <div class="row">
+        <h2 class="text-center">There are No projects posted yet</h2>
+    </div>
+    {% endfor %}    
+</div>
+{% endblock %}

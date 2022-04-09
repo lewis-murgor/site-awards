@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if projects%}
+        <h2>Found {{ projects|length }} items of searched term {{message}}</h2>
+        {% else %}
+        <h2> Found 0 projects for the search term {{message}}</h2>
+        {% endif %}
+    </div>
+    <div class="row">
+
+        {% if projects %}
+        {% for project in projects %}
+        <div class="col-md-5 col-sm-6">
+            <img src="{{project.project_image.url}}" class="img-responsive" alt="Image">
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <a href="{{project.link}}"><h3 class="text-center"><em> Name:</em>{{project.title}}</h3></a>
+            <div class="row">
+                <div class="text-center">
+                    {% autoescape on %}
+                    <strong><em>{{project.description|safe}}</em></strong>
+                    {% endautoescape %}
+                </div>
+            </div>
+            <p class="text-center"><strong><em>Posted on:</em></strong> {{project.date|date:"l d F Y, H:i"}}</p>
+            <div class="panel panel-default">
+                <div class="panel-body rate">
+                    <a href="{%url 'project' project.id%}" style="color: black;">Rate Project</a>
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
