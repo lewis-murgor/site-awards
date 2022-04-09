@@ -12,12 +12,16 @@
   {% endif %}
 
   {% block styles %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda">
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
   {% endblock %}
 
 </head>
 <body>
+
+  {% include "navbar.html" %}
+
   {% block content %} {%endblock%}
 
   {% block scripts %}
