@@ -12,6 +12,11 @@ class Project(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    @classmethod
+    def search_by_title(cls,title):
+        project = cls.objects.filter(title__icontains=title)
+        return project
+
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to = 'images/')
     Bio = models.TextField()
