@@ -3,9 +3,9 @@
 {% block content %}
 {{block.super}}
 <div class="container-fluid">
-    <div class="row text-center">
-        {% if profile.profile_photo %}
-        <img src="{{profile.profile_photo.url}}" class="img-thumbnail" alt="profile_photo">
+    <div class="row profile">
+        {% if user.profile.profile_photo %}
+        <img src="{{user.profile.profile_photo.url}}" class="img-thumbnail" width="500px" alt="profile_photo">
         {%else%}
         <img src="https://avatars.githubusercontent.com/u/95276296?v=4" width="250px"  alt="profile photo">
         {% endif %}
@@ -13,16 +13,16 @@
     <div class="text-center"><strong><em>{{user}}</em></strong></div>
     <br>
     <div class="row text-center">
-        {% if profile.Bio %}
-        <p>{{profile.Bio}}</p>
+        {% if user.profile.Bio %}
+        <p><strong><em>{{user.profile.Bio}}</em></strong></p>
         {%else%}
         <p>No Bio</p>
         {% endif %}
     </div>
     <br>
     <div class="row text-center">
-        {% if profile.contact %}
-        <p>{{profile.contact}}</p>
+        {% if user.profile.contact %}
+        <p><strong><em>{{user.profile.contact}}</em></strong></p>
         {%else%}
         <p></p>
         {% endif %}
@@ -41,14 +41,14 @@
     {% for project in projects %}
     <div class="col-md-4 col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="text-center">{{project.user}}</div>
-            </div>
             <img src="{{project.project_image.url}}" class="img-responsive" alt="">
             <div class="panel-footer" style="background-color: white;">
-                <div class="text-center"><a href="{{project.link}}">{{project.title}}</a></div>
-                {% autoescape on %}<p>{{project.description| safe}}</p>{% endautoescape %}
-                <p class="text-center">Posted on: {{project.date|date:"l d F Y, H:i"}}</p>
+                <div><strong><em>{{project.title}}</em></strong></div>
+                <p>By <strong><em>{{project.user}}</em></strong></p>
+                <div class="date"><p><strong><em>{{project.date|date:"l d F Y, H:i"}}</em></strong></p></div>
+                <hr>
+                <div><a href="{{project.link}}"><button class="btn btn-success">Visit site</button></a></div>
+                <br>
                 <div class="panel panel-default">
                     <div class="panel-body rate">
                         <a href="{%url 'project' project.id%}" style="color: black;">Rate Project</a>

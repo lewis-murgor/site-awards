@@ -8,14 +8,14 @@
         <div class="col-md-4"></div>
         <div class="col-md-4 col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-center">{{project.user}}</div>
-                </div>
                 <img src="{{project.project_image.url}}" class="img-responsive" alt="">
                 <div class="panel-footer" style="background-color: white;">
-                    <div class="text-center"><a href="{{project.link}}">{{project.title}}</a></div>
-                    {% autoescape on %}<p>{{project.description| safe}}</p>{% endautoescape %}
-                    <p class="text-center">Posted on: {{project.date|date:"l d F Y, H:i"}}</p>
+                    <div><strong><em>{{project.title}}</em></strong></div>
+                    <p>By <strong><em>{{project.user}}</em></strong></p>
+                    <div class="date"><p><strong><em>{{project.date|date:"l d F Y, H:i"}}</em></strong></p></div>
+                    <hr>
+                    <div><a href="{{project.link}}"><button class="btn btn-success">Visit site</button></a></div>
+                    <br>
                     <div class="panel panel-default">
                         <div class="panel-body rate">
                             <a href="{%url 'project' project.id%}" style="color: black;">Rate Project</a>

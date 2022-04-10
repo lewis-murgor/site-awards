@@ -9,7 +9,7 @@
             <img src="{{project.project_image.url}}" class="img-responsive" alt="Image">
         </div>
         <div class="col-md-6 col-sm-6">
-            <a href="{{project.link}}"><h3 class="text-center"><em> Name:</em>{{project.title}}</h3></a>
+            <h3 class="text-center"><em> Name:</em>{{project.title}}</h3>
             <div class="row">
                 <div class="text-center">
                     {% autoescape on %}
@@ -18,6 +18,16 @@
                 </div>
             </div>
             <p class="text-center"><strong><em>Posted on:</em></strong> {{project.date|date:"l d F Y, H:i"}}</p>
+            <div class="site"><a href="{{project.link}}"><button class="btn btn-success">Visit site</button></a></div>
+            <br>
+            <hr>
+            <h2>Rate Project</h2>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-2">
+                    <select name="" id=""></select>
+                </div>
+            </div>
         </div>
         
     </div>
