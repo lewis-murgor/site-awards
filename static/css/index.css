@@ -19,3 +19,20 @@ h2 {
 .profile {
     text-align: center;
 }
+.rate_form {
+    background-color: black;
+    color: white;
+}
+
+.profile_page {
+    background-color: white;
+}
+.index {
+    background-color: beige;
+}
+.details {
+    background-color: beige;
+}
+.header {
+    color: darkgoldenrod;
+}
