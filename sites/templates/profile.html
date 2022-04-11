@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {{block.super}}
-<div class="container-fluid">
+<div class="container-fluid profile_page">
     <div class="row profile">
         {% if user.profile.profile_photo %}
         <img src="{{user.profile.profile_photo.url}}" class="img-thumbnail" width="500px" alt="profile_photo">
