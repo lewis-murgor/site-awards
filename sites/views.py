@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
-from .models import Project,Profile
+from .models import Project,Profile, Rate
 from django.contrib.auth.decorators import login_required
-from .forms import ProjectForm,UpdateProfileForm
+from .forms import ProjectForm,UpdateProfileForm,RateForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
@@ -37,7 +37,22 @@ def project(request,project_id):
     except Project.DoesNotExist:
         raise Http404()
 
-    return render(request,"single_project.html", {"project":project})
+    current_user = request.user
+    ratings = Rate.objects.filter(user_id = current_user)
+
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.project = project
+            rating.save()
+            HttpResponseRedirect('project')
+
+    else:
+        form = RateForm()
+
+    return render(request,"single_project.html", {"project":project,"ratings":ratings,"rateForm":form})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
